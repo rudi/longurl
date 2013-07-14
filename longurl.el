@@ -20,12 +20,12 @@
 ;;; 
 ;;; There are two main entry points:
 ;;; 
-;;; - `longurl-expand' prompts for an URL to expand and returns the
-;;;   expanded URL and, when called interactively, also displays it in
-;;;   the echo area.
+;;; - `longurl-expand' takes an URL to expand and returns the expanded
+;;;   URL and, when called interactively, also displays it in the echo
+;;;   area.
 ;;; 
 ;;; - `longurl-expand-at-point' replaces the URL at point with the
-;;;   expanded URL, if any.
+;;;   expanded URL.
 ;;; 
 ;;; - Additionally, `longurl-list-services' returns a list of all
 ;;;   services (is.gd, tinyurl.com, ...) that longurl.org knows how to
