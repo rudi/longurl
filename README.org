@@ -1,0 +1,24 @@
+* What is it?
+
+This is a package for the Emacs text editor that uses the API of
+http://longurl.org/ to expand the abbreviated URLs often found on
+twitter or in mail messages.  
+
+* Using it
+ 
+There are two main entry points:
+ 
+- =M-x longurl-expand= takes an URL to expand and returns the expanded
+  URL and, when called interactively, also displays it in the echo area.
+ 
+- =M-x longurl-expand-at-point= replaces the URL at point with the
+  expanded URL.  If you find yourself using it often, you can add a
+  keybinding for added convenience:
+
+: (global-set-key (kbd "C-c e") 'longurl-expand-at-point)
+
+  (Key combinations =C-c= + letter are reserved for the user in Emacs.)
+ 
+- Additionally, =longurl-list-services= returns a list of all services
+  (=is.gd=, =tinyurl.com=, ...) that =longurl.org= knows how to expand.
+
