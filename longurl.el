@@ -62,19 +62,21 @@
 (defun longurl-list-services ()
   "Return the list of services that longurl.org knows how to expand."
   (interactive)
-  (cl-loop for service
-           in (rest (rest (third (longurl--query-server
-                                  "http://api.longurl.org/v2/services"))))
-           collect (third service)))
+  (let ((services (pcase (longurl--query-server "http://api.longurl.org/v2/services")
+                         (`(response nil (services nil . ,services)) services))))
+    (cl-loop for service in services
+             collect (third service))))
 
 (defun longurl-expand (url)
   "Expand URL and return the result.
 Also print the expansion result in the echo area if called interactively."
   (interactive "MURL: ")
-  (let ((result (third (third (longurl--query-server (format "http://api.longurl.org/v2/expand?url=%s" (url-encode-url url)))))))
-    (when (called-interactively-p 'any)
-      (message result))
-    result))
+  (pcase (longurl--query-server
+          (format "http://api.longurl.org/v2/expand?url=%s" (url-encode-url url)))
+         (`(response nil (long-url nil ,result))
+           (when (called-interactively-p 'any)
+             (message result))
+           result)))
 
 (defun longurl-expand-at-point ()
   "Replace URL at point with expanded URL."(interactive)
